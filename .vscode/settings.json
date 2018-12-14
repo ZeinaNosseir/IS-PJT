@@ -1,0 +1,4 @@
+{ "php.validate.enable": true,
+    "php.validate.run": "onSave",
+    "php.validate.executablePath": "C:/Users/Zeina Nosseir/Documents/GitHub/IS-PJ"
+}
