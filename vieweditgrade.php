@@ -29,8 +29,8 @@ while ($row = $result->fetch_object())
 echo "<tr>";
 echo "<td>" . $row->username . "</td>";
 echo "<td>" . $row->grade . "</td>";
-echo "<td><a href=' editgrade.php'>Edit</a></td>";
-//echo "<td><a href='delete.php?id=" . $row->id . "'>Delete</a></td>";
+echo "<td><a href=' vieweditgrade.php'>Edit</a></td>";
+//echo "<td><a href='delete.php?id5=" . $row->id . "'>Delete</a></td>";
 echo "</tr>";
 }
 
@@ -48,14 +48,14 @@ else
 echo "Error: " . $db->error;
 }
 
-if (isset($_UPDATE['view_students'])) {
+/*if (isset($_UPDATE['edit_students'])) {
     $query = "UPDATE grade where username = '$username'"; 
     if ($db->query($query) === TRUE) {
         echo "Record updated successfully";
     } else {
         echo "Error updating record: " . $db->error;
     }
-    }
+    }*/
   
 // close database connection 
 $db->close();
@@ -67,9 +67,9 @@ $db->close();
 </head>
 <body>
   <div class="header">
-  	<h2>Register</h2>
+  	<h2>Edit</h2>
   </div>
-  <form method="post" action="editgrade.php">
+  <form method="post" action="vieweditgrade.php">
   	<?php include('errors.php'); ?>
       <div class="input-group">
   	  <label>grade</label>
@@ -81,7 +81,7 @@ $db->close();
   	  <input type="username" name="username" value="<?php echo $username; ?>">
   	</div>
 
-    <button type="submit" class="btn" name="view_students">edit grade </button>
+    <button type="submit" class="btn" name="edit_students">edit grade </button>
   	</div>
   </form>
 </body>

@@ -21,7 +21,7 @@ if ($result->num_rows > 0)
 echo "<table border='1' cellpadding='10'>";
 
 // set table headers
-echo "<tr><th>username</th><th>grade</th><tr>";
+echo "<tr><th>username</th><th>grade</th></tr>";
 
 while ($row = $result->fetch_object())
 {
@@ -48,18 +48,11 @@ else
 echo "Error: " . $db->error;
 }
 
-/*if (isset($_UPDATE['edit_students'])) {
-    $query = "UPDATE grade where username = '$username'"; 
-    if ($db->query($query) === TRUE) {
-        echo "Record updated successfully";
-    } else {
-        echo "Error updating record: " . $db->error;
-    }
-    }*/
   
 // close database connection 
 $db->close();
 //<a href="records.php">Add New Record</a> mafrood tb2a taht
 ?>
 
-  
+ 
+</html>

@@ -39,8 +39,9 @@
     <?php  if (isset($_SESSION['username'])) : ?>
     	<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
     	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
-        <p> <a href="viewgrade.php?viewgrade='2'" style="color: red;">view</a> </p>
+        <p> <a href="vieweditgrade.php" style="color: red;">view</a> </p>
     <?php endif ?>
 </div>
 </body>
 </html>
+
