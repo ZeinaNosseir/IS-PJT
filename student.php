@@ -10,9 +10,9 @@
 // connect to the database
 include('server.php');
 
-
+$username = $_SESSION['username'];
 // get the records from the database
-if ($result = $db->query("SELECT * FROM students"))
+if ($result = $db->query("SELECT * FROM students where username = '$username'"))
 {
 // display records if there are records to display
 if ($result->num_rows > 0)
