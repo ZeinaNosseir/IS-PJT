@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// initializing variables
+// first we initialize variables
 $name = "";
 $email    = "";
 $username = "";
@@ -10,12 +10,11 @@ $type="";
 $grade="";
 $errors = array(); 
 
-// connect to the database
+// connection to the database
 $db = mysqli_connect('localhost', 'root', '', 'informationsystem');
 
-// REGISTER USER
+//Initially REGISTER USER 
 if (isset($_POST['reg_user'])) {
-  // receive all input values from the form
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $name = mysqli_real_escape_string($db, $_POST['name']);
   $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -26,7 +25,6 @@ if (isset($_POST['reg_user'])) {
 
 
   // form validation: ensure that the form is correctly filled ...
-  // by adding (array_push()) corresponding error unto $errors array
   if (empty($username)) { array_push($errors, "Username is required"); }
   if (empty($email)) { array_push($errors, "Email is required"); }
   if (empty($name)) { array_push($errors, "name is required"); }
@@ -35,13 +33,12 @@ if (isset($_POST['reg_user'])) {
 
 
 
-  // first check the database to make sure 
-  // a user does not already exist with the same username and/or email
+  //check if the user laready exists to avoid duplicates
   $user_check_query = "SELECT * FROM users WHERE username='$username' OR email='$email' LIMIT 1";
   $result = mysqli_query($db, $user_check_query);
   $user = mysqli_fetch_assoc($result);
   
-  if ($user) { // if user exists
+  if ($user) { 
     if ($user['username'] === $username) {
       array_push($errors, "Username already exists");
     }
@@ -51,10 +48,10 @@ if (isset($_POST['reg_user'])) {
     }
   }
 
-  // Finally, register user if there are no errors in the form
+  // register user if there are no errors in the form
   if (count($errors) == 0) {
-
-  	$password_hashed = md5($password);//encrypt the password before saving in the database
+    //encrypt the password before saving in the database
+  	$password_hashed = md5($password);
     
   	$query = "INSERT INTO users (name,username, email, password,type) 
           VALUES('$name','$username', '$email', '$password_hashed','$type')";
@@ -62,9 +59,7 @@ if (isset($_POST['reg_user'])) {
           $query1= "INSERT INTO students (username,grade)
            VALUES ('$username','$grade')";
          
-        
-    //$query1= "INSERT INTO students (username, grade) VALUES ('$username','')";
-        
+                
     mysqli_query($db, $query);
     if ($type === "Student"){
     mysqli_query($db, $query1); 
@@ -96,29 +91,12 @@ if (isset($_POST['login_user'])) {
     array_push($errors, "Type is required");
 }
 if (count($errors) == 0) {
-  // $password = password_hash($password, PASSWORD_DEFAULT);
-    // echo($password);
-    //$query = "SELECT * FROM users WHERE username='$username' and type='$type'";
-    // echo($password);
-    // $res = password_verify("1234", $query);
-    // echo($query);
+  
     $password = md5($password);
     $query = "SELECT password  FROM users WHERE username='$username'";
-    //$results = mysqli_query($db, $query);
-   $results = mysqli_query($db, $query);
-   //$query2=mysqli_query($db, $query);
-  // $result =mysqli_store_result($results);
-    //$password2 = mysqli_use_result($);
-  // echo $password2 ;
-  $password2 = mysqli_fetch_assoc($results);
+    $results = mysqli_query($db, $query);
+    $password2 = mysqli_fetch_assoc($results);
 
-//       while ($row = $results->fetch_assoc()) {
-//         $password_hashed = $row['password'];
-//         // echo($password);
-// // $2y$10$6GC.tZSHH.aBIAwzZ3
-//       }
-  // echo($password_hashed);
-//$res = password_verify($password ,$password_hashed);
   if ($password2['password'] === $password) {
       $_SESSION['username'] = $username;
       $_SESSION['success'] = "You are now logged in";

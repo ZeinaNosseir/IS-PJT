@@ -12,7 +12,7 @@ include('server.php');
 
 $_SESSION ['username']= $username;
 
-// get the records from the database
+// retrieve recoord from database
 if ($result = $db->query("SELECT * FROM students"))
 {
 // display records if there are records to display
@@ -31,30 +31,24 @@ echo "<tr>";
 echo "<td>" . $row->username . "</td>";
 echo "<td>" . $row->grade . "</td>";
 echo "<td><a href=' edit.php'>Edit</a></td>";
-//echo "<td><a href='delete.php?id=" . $row->id . "'>Delete</a></td>";
 echo "</tr>";
 }
 
 echo "</table>";
 }
-// if there are no records in the database, display an alert message
+// alert message if records not available
 else
 {
 echo "No results to display!";
 }
 }
-// show an error if there is an issue with the database query
 else
 {
 echo "Error: " . $db->error;
 }
-
-
-  
+ 
 // close database connection 
 $db->close();
-//<a href="records.php">Add New Record</a> mafrood tb2a taht
 ?>
-
   
 </html>
