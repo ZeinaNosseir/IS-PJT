@@ -4,14 +4,14 @@
   }
   body {
     font-size: 120%;
-    background: #F8F8FF;
+    background: url("1.jpg");
   }
   
   .header {
     width: 30%;
     margin: 50px auto 0px;
     color: white;
-    background: #5F9EA0;
+    background: rgb(20, 20, 20);
     text-align: center;
     border: 1px solid #B0C4DE;
     border-bottom: none;
@@ -46,7 +46,7 @@
     padding: 10px;
     font-size: 15px;
     color: white;
-    background: #5F9EA0;
+    background: rgb(19, 20, 20);
     border: none;
     border-radius: 5px;
   }
@@ -61,8 +61,8 @@
     text-align: left;
   }
   .success {
-    color: #3c763d; 
+    color: #0d0f0d; 
     background: #dff0d8; 
-    border: 1px solid #3c763d;
+    border: 1px solid #0f0f0f;
     margin-bottom: 20px;
   }

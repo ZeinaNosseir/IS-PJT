@@ -49,19 +49,7 @@ else
 echo "Error: " . $db->error;
 }
 
-/*if (isset($_UPDATE['edit_students'])) {
-    $username = mysqli_real_escape_string($db, $_POST['username']);
-    $grade = mysqli_real_escape_string($db, $_POST['grade']);
-    $query = "UPDATE grade where username = '$username'"; 
 
-    mysqli_fetch_assoc($query);
-
-    if ($db->query($query) === TRUE) {
-        echo "Record updated successfully";
-    } else {
-        echo "Error updating record: " . $db->error;
-    }
-    }*/
   
 // close database connection 
 $db->close();

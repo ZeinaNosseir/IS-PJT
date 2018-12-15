@@ -74,7 +74,7 @@ if (isset($_POST['reg_user'])) {
     $_SESSION['success'] = "You are now logged in";
     if ($type === "Student"){
     header('location: student.php');}
-   else if ($type === "Teacher Assistant"){
+   else if ($type === "TA"){
       header('location: teachingassistant.php');}
      else if ($type === "Lecturer"){
         header('location: lecturer.php');}
@@ -84,7 +84,7 @@ if (isset($_POST['reg_user'])) {
 if (isset($_POST['login_user'])) {
   $username = mysqli_real_escape_string($db, $_POST['username']);
   $password = mysqli_real_escape_string($db, $_POST['password']);
- // $type = mysqli_real_escape_string($db, $_POST['type']);
+  $type = mysqli_real_escape_string($db, $_POST['type']);
 
   if (empty($username)) {
       array_push($errors, "Username is required");
@@ -92,51 +92,55 @@ if (isset($_POST['login_user'])) {
   if (empty($password)) {
       array_push($errors, "Password is required");
   }
-  //if (empty($type)) {
-    //array_push($errors, "Type is required");
-//}
-
-
-  if (count($errors) == 0) {
-    // $password = password_hash($password, PASSWORD_DEFAULT);
-      // echo($password);
-      $password_compare= md5($password);
-      $query = "SELECT password FROM users WHERE username='$username'";
-      // echo($password);
-      // $res = password_verify("1234", $query);
-      // echo($query);
-
-      $results = mysqli_query($db, $query);
-      $password_compare2= mysqli_fetch_assoc($results);
-
-      //while ($row = $results->fetch_assoc()) {
-        //$password_hashed = $row['password'];
-        // echo($password);
-    //}
-// $2y$10$6GC.tZSHH.aBIAwzZ3
-
-    // echo($password_hashed);
-    //$res = password_verify($password ,$password_hashed);
-    
-    if ($password_compare2['password'] === $password_compare) {
-      $_SESSION['username'] = $username;
-      $_SESSION['success'] = "You are now logged in";
-      header('location: student.php') ;
-      echo("you are in");
-  }
- if($password_compare2['password'] === $password_compare){
-      $_SESSION['username'] = $username;
-      $_SESSION['success'] = "You are now logged in";
-      header('location: lecturer.php') ;
-      echo("you are in"); 
-} if($password_compare2['password'] === $password_compare){
-$_SESSION['username'] = $username;
-$_SESSION['success'] = "You are now logged in";
-header('location: ta.php');
-echo("you are in"); 
+  if (empty($type)) {
+    array_push($errors, "Type is required");
 }
+if (count($errors) == 0) {
+  // $password = password_hash($password, PASSWORD_DEFAULT);
+    // echo($password);
+    //$query = "SELECT * FROM users WHERE username='$username' and type='$type'";
+    // echo($password);
+    // $res = password_verify("1234", $query);
+    // echo($query);
+    $password = md5($password);
+    $query = "SELECT password  FROM users WHERE username='$username'";
+    //$results = mysqli_query($db, $query);
+   $results = mysqli_query($db, $query);
+   //$query2=mysqli_query($db, $query);
+  // $result =mysqli_store_result($results);
+    //$password2 = mysqli_use_result($);
+  // echo $password2 ;
+  $password2 = mysqli_fetch_assoc($results);
+
+//       while ($row = $results->fetch_assoc()) {
+//         $password_hashed = $row['password'];
+//         // echo($password);
+// // $2y$10$6GC.tZSHH.aBIAwzZ3
+//       }
+  // echo($password_hashed);
+//$res = password_verify($password ,$password_hashed);
+  if ($password2['password'] === $password) {
+      $_SESSION['username'] = $username;
+      $_SESSION['success'] = "You are now logged in";
+      $query_type = "SELECT type  FROM users WHERE username='$username'";
+      $results1 = mysqli_query($db, $query_type);
+      $type_12 = mysqli_fetch_assoc($results1);
+
+      if ($type === $type_12['type'] && $type == 'Student'){
+        header('location: student.php');
+        echo("you are in");}
+       else if ($type === $type_12['type'] && $type == 'TA'){
+          header('location: teachingassistant.php');
+          echo("you are in");
+        }
+         else if ($type === $type_12['type'] && $type == 'Lecturer'){
+            header('location: lecturer.php');
+            echo("you are in");
+          }
 else {
         array_push($errors, "Wrong username/password and type combination");
     }
   }
 }
+}
+
