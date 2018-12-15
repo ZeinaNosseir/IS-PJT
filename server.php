@@ -144,3 +144,12 @@ else {
 }
 }
 
+if (isset($_POST['Edit_Grade'])) {
+  $username = mysqli_real_escape_string($db, $_POST['username']);
+  $grade = mysqli_real_escape_string($db, $_POST['grade']);
+  $query_grade = "Update students set grade = $grade WHERE username='$username'";
+  $results = mysqli_query($db, $query_grade);
+}
+
+
+

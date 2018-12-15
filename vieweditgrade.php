@@ -62,29 +62,4 @@ $db->close();
 //<a href="records.php">Add New Record</a> mafrood tb2a taht
 ?>
 
-  <title>Registration system PHP and MySQL</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-  <div class="header">
-  	<h2>Edit</h2>
-  </div>
-  <form method="post" action="vieweditgrade.php">
-  	<?php include('errors.php'); ?>
-      <div class="input-group">
-  	  <label>grade</label>
-  	  <input type="grade" name="grade" value="<?php echo $grade; ?>">
-  	</div>
-
-    <div class="input-group">
-  	  <label>username</label>
-  	  <input type="username" name="username" value="<?php echo $username; ?>">
-  	</div>
-
-    <button type="submit" class="btn" name="edit_students">edit grade </button>
-  	</div>
-  </form>
-</body>
-
-</body>
-</html>
+ 

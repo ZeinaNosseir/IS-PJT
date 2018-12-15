@@ -1,26 +1,34 @@
-<?php
-	include_once('server.php');
-
-	if( isset($_GET['edit']) )
-	{
-		$username = $_GET['edit'];
-		$res= mysql_query("SELECT * FROM students WHERE username='$username'");
-		$row= mysql_fetch_array($res);
-	}
-
-	if( isset($_POST['newGrade']) )
-	{
-		$newGrade = $_POST['newGrade'];
-		$grade	 = $_POST['grade'];
-		$sql     = "UPDATE students SET grade='$newGrade' WHERE username='$username'";
-		$res 	 = mysql_query($sql) 
-                                    or die("Could not update".mysql_error());
-		echo "<meta http-equiv='refresh' content='0;url=index.php'>";
-	}
-
-?>
-<form action="edit.php" method="POST">
-Grade: <input type="text" name="newName" value="<?php echo $row[1];?>"><br />
-<input type="hidden" name="id" value="<?php echo $row[0]; ?>">
-<input type="submit" value=" Update "/>
-</form>
+<?php include('server.php') ?>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration system PHP and MySQL</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <div class="header">
+  	<h2>Edit</h2>
+  </div>
+	 
+  <form method="post" action="edit.php">
+  	<?php include('errors.php'); ?>
+  	<div class="input-group">
+  		<label ><font color="white">Username</font></label>
+  		<input type="text" name="username" >
+  	</div>
+  	<div class="input-group">
+  		<label><font color="white">grade</label>
+  		<input type="grade" name="grade">
+  	</div>
+    
+    
+  	<div class="input-group">
+          <button type="submit" class="btn" name="Edit_Grade">Edit</button>
+        
+  	</div>
+  	<p>
+  		 <a href="lecturer.php">Back</a>
+  	</p>
+  </form>
+</body>
+</html>
